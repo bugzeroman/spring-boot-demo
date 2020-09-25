@@ -1,2 +1,5 @@
 server:
   port: 8011
+  
+info: 
+  description: spring boot demo for actuator 
