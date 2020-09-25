@@ -3,3 +3,5 @@ server:
   
 info: 
   description: spring boot demo for actuator 
+
+management:  endpoints:    web:      exposure:        include: "*"
