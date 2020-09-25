@@ -1,0 +1,53 @@
+HELP.md
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+# Maven #
+target/
+*.class
+
+# IntelliJ IDEA #
+.idea
+*.iws
+*.iml
+*.ipr
+
+# Eclipse #
+.settings/
+.classpath
+*.factorypath
+.project
+.metadata
+
+# STS #
+.apt_generated
+.springBeans
+.sts4-cache
+
+# MacOSX #
+.DS_Store
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Log file #
+*.log
+*.log.gz
+
+# NetBeans #
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+# VS Code #
+.vscode/
