@@ -5,4 +5,42 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <description>Sprign Boot Demo Project</description>
+  
+  <dependencyManagement>
+		<dependencies>
+			<!--spring boot dependencies -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.3.1.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<modules>
+		<module>eureka-server</module>
+		<module>gateway</module>
+		<module>config-server</module>
+		<module>config-client</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.3.1.RELEASE</version>
+				<executions>
+					<execution>
+						<!--打包时，重新打包指定spring boot的启动类 -->
+						<id>repackage</id>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
