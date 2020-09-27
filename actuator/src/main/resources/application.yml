@@ -4,4 +4,5 @@ server:
 info: 
   description: spring boot demo for actuator 
   
-management:  endpoints:    enabled-by-default: true    web:      exposure:        include: "*"      base-path: /manage
+management:  endpoints:    enabled-by-default: true    web:      exposure:        include: "*"
+  endpoint:    health:      show-details: always
