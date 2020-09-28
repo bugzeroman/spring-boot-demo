@@ -4,6 +4,6 @@ server:
 info:
   description: spring boot actuator
   
-management:  endpoints:    web:      exposure:        include: "*"    enabled-by-default: false
-  endpoint:    shutdown:      enabled: true
-  
+management:  endpoints:    web:      exposure:        include: "*"      path-mapping:
+        health: healthcheck
+        
