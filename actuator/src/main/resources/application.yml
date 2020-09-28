@@ -1,8 +1,7 @@
 server:
   port: 8011
   
-info: 
-  description: spring boot demo for actuator 
+info:
+  description: spring boot actuator
   
-management:  endpoints:    enabled-by-default: true    web:      exposure:        include: "*"
-  endpoint:    health:      show-details: always
+management:  endpoints:    web:      exposure:        include: loggers
