@@ -4,4 +4,6 @@ server:
 info:
   description: spring boot actuator
   
-management:  endpoints:    web:      exposure:        include: loggers
+management:  endpoints:    web:      exposure:        include: "*"
+        exclude:        - loggers
+        - env
