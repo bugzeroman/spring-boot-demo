@@ -4,5 +4,6 @@ server:
 info:
   description: spring boot actuator
   
-management:  endpoints:    web:      exposure:        include: "*"  endpoint:    shutdown:      enabled: true
-    loggers:      enabled: false
+management:  endpoints:    web:      exposure:        include: "*"    enabled-by-default: false
+  endpoint:    shutdown:      enabled: true
+  
