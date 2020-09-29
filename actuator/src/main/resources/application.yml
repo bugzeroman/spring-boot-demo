@@ -6,6 +6,8 @@ info:
 
 management:
   endpoint:    health:      show-details: always
+  health:    defaults:      enabled: false
+    db:      enabled: true
       
 spring:
   datasource:
