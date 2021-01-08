@@ -10,6 +10,10 @@
 	<artifactId>elasticsearch</artifactId>
 	<description>Demo for spring-boot-starter-data-elasticsearch</description>
 
+	<properties>
+		<spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
