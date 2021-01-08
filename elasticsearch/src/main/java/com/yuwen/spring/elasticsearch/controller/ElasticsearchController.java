@@ -7,6 +7,7 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.Query;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +37,9 @@ public class ElasticsearchController {
 		return city;
 	}
 
+	/**
+	 * 复杂查询，未实现
+	 */
 	@GetMapping("city/name/{name}")
 	public City getCityByName(@PathVariable String name) {
 
@@ -44,6 +48,12 @@ public class ElasticsearchController {
 		SearchHits<City> result = esTemplate.search(query, City.class, index);
 		System.out.println("name=" + name + ", query result=" + result);
 		return result.getSearchHit(0).getContent();
+	}
+
+	@DeleteMapping("city/id/{id}")
+	public void deleteCityById(@PathVariable String id) {
+		String result = esTemplate.delete(id, City.class);
+		System.out.println("id=" + id + ", delete result=" + result);
 	}
 
 }
