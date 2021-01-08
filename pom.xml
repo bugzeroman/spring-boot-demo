@@ -24,6 +24,7 @@
 		<module>config-server</module>
 		<module>config-client</module>
 		<module>actuator</module>
+		<module>elasticsearch</module>
 	</modules>
 
 	<build>

@@ -6,13 +6,12 @@ info:
 
 management:
   endpoint:    health:      show-details: always
-  health:    defaults:      enabled: false
-    db:      enabled: true
-      
+  health:
+    defaults:      enabled: false
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://10.21.13.14:3306/demodb
     username: demo
     password: demo123456
- 
