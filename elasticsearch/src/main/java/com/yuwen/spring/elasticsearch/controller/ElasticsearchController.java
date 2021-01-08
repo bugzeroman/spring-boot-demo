@@ -2,7 +2,6 @@ package com.yuwen.spring.elasticsearch.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.query.GetQuery;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +25,8 @@ public class ElasticsearchController {
 	}
 
 	@GetMapping("city/{id}")
-	public City getCityById(@PathVariable("id") Long id) {
-		City city = esClient.queryForObject(GetQuery.getById(id.toString()), City.class);
+	public City getCityById(@PathVariable("id") String id) {
+		City city = esClient.get(id, City.class);
 		System.out.println("id=" + id + ", query city=" + city);
 		return city;
 	}
