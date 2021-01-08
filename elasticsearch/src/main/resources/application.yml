@@ -1,0 +1,4 @@
+server:
+  port: 9211
+  
+spring:  elasticsearch:    rest:      uris:      - 10.21.13.14:9200
