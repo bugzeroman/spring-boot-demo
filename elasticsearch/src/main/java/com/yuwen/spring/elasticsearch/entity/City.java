@@ -17,7 +17,7 @@ public class City implements Serializable {
 	/**
 	 * 省份编号
 	 */
-	private Long provinceid;
+	private String provinceName;
 
 	/**
 	 * 城市名称
@@ -37,12 +37,12 @@ public class City implements Serializable {
 		this.id = id;
 	}
 
-	public Long getProvinceid() {
-		return provinceid;
+	public String getProvinceName() {
+		return provinceName;
 	}
 
-	public void setProvinceid(Long provinceid) {
-		this.provinceid = provinceid;
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
 	}
 
 	public String getCityname() {
@@ -67,7 +67,7 @@ public class City implements Serializable {
 
 	@Override
 	public String toString() {
-		return "City [id=" + id + ", provinceid=" + provinceid + ", cityname=" + cityname + ", description="
+		return "City [id=" + id + ", provinceName=" + provinceName + ", cityname=" + cityname + ", description="
 				+ description + "]";
 	}
 }
