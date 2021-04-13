@@ -1,8 +1,11 @@
 package com.yuwen.spring.demo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
+	private static final long serialVersionUID = -3301999810945119126L;
+
 	private Long id;
 
 	private String name;
