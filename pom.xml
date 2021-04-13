@@ -29,6 +29,7 @@
 		<module>config-client</module>
 		<module>actuator</module>
 		<module>elasticsearch</module>
+		<module>basic</module>
 	</modules>
 
 	<build>
