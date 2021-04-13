@@ -2,6 +2,7 @@ package com.yuwen.spring.demo.controller;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +29,9 @@ public interface UserController {
 	/**
 	 * 更新用户
 	 */
+	@CachePut(value = "user", key = "#id")
 	@PutMapping("{id}")
-	void upadteUser(@PathVariable Long id, @RequestBody User user);
+	User upadteUser(@PathVariable Long id, @RequestBody User user);
 
 	/**
 	 * 删除用户
@@ -40,7 +42,7 @@ public interface UserController {
 	/**
 	 * 查询指定用户
 	 */
-	@Cacheable(value = "user", key = "targetClass + methodName + #id")
+	@Cacheable(value = "user", key = "#id")
 	@GetMapping("one/{id}")
 	User getOneUser(@PathVariable Long id);
 

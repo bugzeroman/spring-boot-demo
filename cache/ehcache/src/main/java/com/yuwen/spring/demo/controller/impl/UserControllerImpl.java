@@ -19,8 +19,9 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@Override
-	public void upadteUser(Long id, User user) {
+	public User upadteUser(Long id, User user) {
 		System.out.println("upadteUser, id=" + id + ", user=" + user);
+		return user;
 	}
 
 	@Override
