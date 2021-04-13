@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.yuwen.spring</groupId>
-		<artifactId>basic</artifactId>
+		<artifactId>cache</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>spring-boot-maven</artifactId>
-
+	<artifactId>ehcache</artifactId>
+	<description>Spring Boot Cache集成Ehcache使用</description>
 	<dependencies>
 		<!-- Spring Boot Web服务 -->
 		<dependency>
@@ -45,23 +45,4 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.3.1.RELEASE</version>
-				<executions>
-					<execution>
-						<!--打包时，重新打包指定spring boot的启动类 -->
-						<id>repackage</id>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>

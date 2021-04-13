@@ -30,6 +30,7 @@
 		<module>actuator</module>
 		<module>elasticsearch</module>
 		<module>basic</module>
+		<module>cache</module>
 	</modules>
 
 	<build>
