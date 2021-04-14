@@ -10,5 +10,6 @@
   <description>Spring Boot Cache集成各种缓存实现，如RedisCache，EhCacheCache等</description>
   <modules>
   	<module>ehcache</module>
+  	<module>ehcache-advance</module>
   </modules>
 </project>
