@@ -20,9 +20,18 @@ import com.yuwen.spring.demo.entity.User;
 /**
  * 用户的增删改查相关接口
  */
-@CacheConfig(cacheNames = "user")
+@CacheConfig(cacheNames = UserController.USER_CACHE_NAME)
 @RequestMapping("user")
 public interface UserController {
+	/**
+	 * 用户缓存名称
+	 */
+	String USER_CACHE_NAME = "user";
+	/**
+	 * 用户缓存主键
+	 */
+	String USER_CACHE_KEY = "targetClass.getName() + #id";
+
 	/**
 	 * 创建用户
 	 */
@@ -32,21 +41,21 @@ public interface UserController {
 	/**
 	 * 更新用户
 	 */
-	@CachePut(key = "targetClass.getName() + #id")
+	@CachePut(key = USER_CACHE_KEY)
 	@PutMapping("{id}")
 	User upadteUser(@PathVariable Long id, @RequestBody User user);
 
 	/**
 	 * 删除用户
 	 */
-	@CacheEvict(key = "targetClass.getName() + #id")
+	@CacheEvict(key = USER_CACHE_KEY)
 	@DeleteMapping("{id}")
 	void deleteUser(@PathVariable("id") Long id);
 
 	/**
 	 * 查询指定用户
 	 */
-	@Cacheable(key = "targetClass.getName() + #id")
+	@Cacheable(key = USER_CACHE_KEY)
 	@GetMapping("one/{id}")
 	User getOneUser(@PathVariable Long id);
 
