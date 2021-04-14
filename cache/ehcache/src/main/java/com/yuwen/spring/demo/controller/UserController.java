@@ -26,7 +26,7 @@ public interface UserController {
 	/**
 	 * 用户缓存名称
 	 */
-	String USER_CACHE_NAME = "user";
+	String USER_CACHE_NAME = "userstore";
 	/**
 	 * 用户缓存主键
 	 */
