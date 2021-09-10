@@ -1,15 +1,19 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.yuwen.spring</groupId>
-    <artifactId>spring-boot-demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>cache</artifactId>
-  <packaging>pom</packaging>
-  <description>Spring Boot Cache集成各种缓存实现，如RedisCache，EhCacheCache等</description>
-  <modules>
-  	<module>ehcache</module>
-  	<module>ehcache-advance</module>
-  </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.yuwen.spring</groupId>
+		<artifactId>spring-boot-demo</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>cache</artifactId>
+	<packaging>pom</packaging>
+	<description>Spring Boot Cache集成各种缓存实现，如RedisCache，EhCacheCache等</description>
+	<modules>
+		<module>ehcache</module>
+		<module>ehcache-advance</module>
+
+		<module>redis-jedis</module>
+	</modules>
 </project>
