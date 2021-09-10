@@ -21,6 +21,8 @@ public class JedisKeyTest {
 		String host = "10.21.13.14";
 		int port = 6379;
 		jedis = new Jedis(host, port);
+
+		jedis.flushDB();
 	}
 
 	@AfterClass
