@@ -1,19 +1,20 @@
 package com.yuwen.spring.demo.controller.impl;
 
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yuwen.spring.demo.controller.UserController;
 import com.yuwen.spring.demo.entity.User;
 
 /**
- * 使用CacheManager自己管理缓存，不使用基于注解的方式
+ * 使用CacheManager自己管理缓存，不使用基于注解的方式, 使用redisTemplate和cacheManager都可以操作缓存，
+ * 使用redisTemplate能使用redis特定的数据类型。
  *
  */
 @RestController
@@ -22,10 +23,15 @@ public class UserControllerImpl implements UserController {
 	@Autowired
 	private CacheManager cacheManager;
 
+	@Autowired
+	private RedisTemplate redisTemplate;
+
 	@Override
 	public void createUser(User user) {
+		// 使用redisTemplate需要手动加上缓存前缀user::
+		String key = "user::id_" + user.getId();
+		redisTemplate.opsForValue().set(key, user);
 		System.out.println("createUser, user=" + user);
-
 	}
 
 	@Override
@@ -41,7 +47,7 @@ public class UserControllerImpl implements UserController {
 
 	@Override
 	public User getOneUser(Long id) {
-		// 先从缓存中读取
+		// 先从缓存中读取，自动会给key加上缓存前缀user::
 		Cache cache = cacheManager.getCache(USER_CACHE_NAME);
 		String key = "id_" + id;
 		User userCache = cache.get(key, User.class);
@@ -64,11 +70,10 @@ public class UserControllerImpl implements UserController {
 	@Override
 	public List<User> getAllUser(Integer pageNum, Integer pageSize) {
 		System.out.println("getAllUser, pageNum=" + pageNum + ", pageSize=" + pageSize);
-		User user = new User();
-		user.setId(999L);
-		user.setName("all");
-		user.setBirthday(new Date());
-		return Collections.singletonList(user);
+		Set<String> keys = redisTemplate.keys("*");
+		List<User> users = redisTemplate.opsForValue().multiGet(keys);
+		System.out.println("getAllUser users=" + users);
+		return users;
 	}
 
 }
