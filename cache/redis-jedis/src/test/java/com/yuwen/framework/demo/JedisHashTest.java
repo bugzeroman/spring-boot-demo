@@ -11,7 +11,7 @@ import org.junit.Test;
 import redis.clients.jedis.Jedis;
 
 /**
- * 5.Jedis-API:Hash
+ * 6.Jedis-API:Hash
  *
  */
 public class JedisHashTest {
