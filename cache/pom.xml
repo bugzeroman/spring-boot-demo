@@ -15,5 +15,6 @@
 		<module>ehcache-advance</module>
 
 		<module>redis-jedis</module>
+		<module>redis-starter</module>
 	</modules>
 </project>
