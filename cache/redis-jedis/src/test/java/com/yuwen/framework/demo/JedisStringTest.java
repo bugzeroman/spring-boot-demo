@@ -1,5 +1,7 @@
 package com.yuwen.framework.demo;
 
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,7 +31,18 @@ public class JedisStringTest {
 	}
 
 	@Test
-	public void testKeys() {
+	public void testSetString() {
+		jedis.set("s1", "v1");
+		String value = jedis.get("s1");
+		System.out.println("s1 value=" + value);
+
+	}
+
+	@Test
+	public void testMsetString() {
+		jedis.mset("ms1", "mv1", "ms2", "mv2", "ms3", "mv3");
+		List<String> mget = jedis.mget("ms1", "ms2", "ms3");
+		System.out.println("ms1,2,3, values=" + mget);
 	}
 
 }

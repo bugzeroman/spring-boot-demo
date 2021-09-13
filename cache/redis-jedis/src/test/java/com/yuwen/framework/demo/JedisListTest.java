@@ -1,5 +1,7 @@
 package com.yuwen.framework.demo;
 
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,7 +31,20 @@ public class JedisListTest {
 	}
 
 	@Test
-	public void testKeys() {
+	public void testList() {
+		jedis.lpush("list1", "lv1", "lv2", "lv3");
+		List<String> list1 = jedis.lrange("list1", 0, -1);
+		System.out.println("list1 lrange=" + list1);
+
+		jedis.rpush("list2", "rv1", "rv2", "rv3");
+		List<String> list2 = jedis.lrange("list2", 0, -1);
+		System.out.println("list2 lrange=" + list2);
+
+		jedis.rpop("list2");
+		jedis.lpop("list2");
+		list2 = jedis.lrange("list2", 0, -1);
+		System.out.println("list2 lrange=" + list2);
+
 	}
 
 }

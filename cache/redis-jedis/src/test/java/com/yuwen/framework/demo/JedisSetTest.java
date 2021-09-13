@@ -1,5 +1,7 @@
 package com.yuwen.framework.demo;
 
+import java.util.Set;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,7 +31,14 @@ public class JedisSetTest {
 	}
 
 	@Test
-	public void testKeys() {
+	public void testSet() {
+		String key1 = "set1";
+		jedis.sadd(key1, "tom");
+		jedis.sadd(key1, "jerry");
+		jedis.sadd(key1, "lucy");
+
+		Set<String> smembers = jedis.smembers(key1);
+		System.out.println("set1 smembers=" + smembers);
 	}
 
 }
