@@ -28,5 +28,11 @@
 			<artifactId>commons-pool2</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>30.1.1-jre</version>
+		</dependency>
+
 	</dependencies>
 </project>
