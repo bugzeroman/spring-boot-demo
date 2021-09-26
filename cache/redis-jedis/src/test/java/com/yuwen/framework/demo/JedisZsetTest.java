@@ -22,7 +22,7 @@ public class JedisZsetTest {
 		String host = "10.21.13.14";
 		int port = 6379;
 		jedis = new Jedis(host, port);
-
+		jedis.select(5);
 		jedis.flushDB();
 	}
 
@@ -51,6 +51,26 @@ public class JedisZsetTest {
 
 		Set<String> zrangeByScore2 = jedis.zrangeByScore(key1, "-inf", "+inf");
 		System.out.println("zset1 [-inf,+inf]=" + zrangeByScore2);
+	}
+
+	/**
+	 * Zset删除指定分数范围内的元素
+	 */
+	@Test
+	public void testZsetRemoveByScore() {
+		String key1 = "zsetRevome";
+		jedis.zadd(key1, 400d, "C");
+		jedis.zadd(key1, 500d, "C++");
+		jedis.zadd(key1, 100d, "Java");
+		jedis.zadd(key1, 200d, "SQL");
+		jedis.zadd(key1, 300d, "Python");
+		Set<String> zrange1 = jedis.zrange(key1, 0, -1);
+		System.out.println(key1 + "before remove =" + zrange1);
+
+		// 删除300分以下的元素
+		jedis.zremrangeByScore(key1, 0, 300);
+		Set<String> zrange2 = jedis.zrange(key1, 0, -1);
+		System.out.println(key1 + "after remove =" + zrange2);
 	}
 
 }

@@ -21,6 +21,8 @@ public class JedisListTest {
 		String host = "10.21.13.14";
 		int port = 6379;
 		jedis = new Jedis(host, port);
+		// 指定缓存数据库
+		jedis.select(3);
 
 		jedis.flushDB();
 	}
@@ -45,6 +47,23 @@ public class JedisListTest {
 		list2 = jedis.lrange("list2", 0, -1);
 		System.out.println("list2 lrange=" + list2);
 
+	}
+
+	/**
+	 * 设置列表固定长度
+	 */
+	@Test
+	public void testListFixedSize() {
+		String key = "list-fix";
+		jedis.rpush(key, "v1", "v2", "v3", "v4", "v5");
+		List<String> list1 = jedis.lrange(key, 0, -1);
+		System.out.println(key + " before lrange=" + list1);
+
+		long start = 0;
+		long stop = -1;
+		jedis.ltrim(key, start, stop);
+		List<String> list2 = jedis.lrange(key, 2, -1);
+		System.out.println(key + " after lrange=" + list2);
 	}
 
 }
