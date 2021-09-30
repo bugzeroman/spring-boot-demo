@@ -31,6 +31,7 @@
 		<module>elasticsearch</module>
 		<module>basic</module>
 		<module>cache</module>
+		<module>database</module>
 	</modules>
 
 	<build>
