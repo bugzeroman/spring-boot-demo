@@ -48,6 +48,55 @@
 
 	<build>
 		<plugins>
+			<!-- proguard代码混淆插件 -->
+			<plugin>
+				<groupId>com.github.wvengen</groupId>
+				<artifactId>proguard-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>proguard</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<proguardVersion>5.3.3</proguardVersion>
+					<injar>${project.build.finalName}.jar</injar>
+					<outjar>${project.build.finalName}-pg.jar</outjar>
+					<obfuscate>true</obfuscate>
+					<proguardInclude>${project.basedir}/src/main/resources/proguard.conf</proguardInclude>
+					<libs>
+						<!-- Include main JAVA library required. -->
+						<lib>${java.home}/lib/rt.jar</lib>
+						<!-- Include crypto JAVA library if necessary. -->
+						<lib>${java.home}/lib/jce.jar</lib>
+					</libs>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>net.sf.proguard</groupId>
+						<artifactId>proguard-base</artifactId>
+						<version>5.3.3</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<mainClass>com.geekkeybo.weather.WeatherApplication</mainClass>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Spring Boot打包插件 -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
