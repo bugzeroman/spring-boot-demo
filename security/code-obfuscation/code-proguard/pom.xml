@@ -52,6 +52,7 @@
 			<plugin>
 				<groupId>com.github.wvengen</groupId>
 				<artifactId>proguard-maven-plugin</artifactId>
+				<version>2.5.1</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -80,20 +81,6 @@
 						<version>5.3.3</version>
 					</dependency>
 				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-						<configuration>
-							<mainClass>com.geekkeybo.weather.WeatherApplication</mainClass>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 
 			<!-- Spring Boot打包插件 -->
