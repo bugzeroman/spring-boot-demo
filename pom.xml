@@ -32,6 +32,7 @@
 		<module>basic</module>
 		<module>cache</module>
 		<module>database</module>
+		<module>security</module>
 	</modules>
 
 	<build>
