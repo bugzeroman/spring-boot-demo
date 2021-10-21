@@ -48,50 +48,21 @@
 
 	<build>
 		<plugins>
-			<!-- proguard代码混淆插件 -->
-			<plugin>
-				<groupId>com.github.wvengen</groupId>
-				<artifactId>proguard-maven-plugin</artifactId>
-				<version>2.5.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>proguard</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<proguardVersion>5.3.3</proguardVersion>
-					<injar>${project.build.finalName}.jar</injar>
-					<outjar>${project.build.finalName}-pg.jar</outjar>
-					<obfuscate>true</obfuscate>
-					<proguardInclude>${project.basedir}/src/main/resources/proguard.conf</proguardInclude>
-					<libs>
-						<!-- Include main JAVA library required. -->
-						<lib>${java.home}/lib/rt.jar</lib>
-						<!-- Include crypto JAVA library if necessary. -->
-						<lib>${java.home}/lib/jce.jar</lib>
-					</libs>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>net.sf.proguard</groupId>
-						<artifactId>proguard-base</artifactId>
-						<version>5.3.3</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-
-			<!-- Spring Boot打包插件 -->
+			<!-- Spring Boot打包插件,必须在proguard插件前面 -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>2.3.1.RELEASE</version>
+				<configuration>
+					<!--指定spring boot的启动类 -->
+					<mainClass>com.yuwen.spring.demo.DemoApplication</mainClass>
+					<!--指定打包后jar包的名称 -->
+					<classifier>exec</classifier>
+				</configuration>
 				<executions>
 					<execution>
 						<!--打包时，重新打包指定spring boot的启动类 -->
-						<id>repackage</id>
+						<id>repackage when package</id>
 						<goals>
 							<goal>repackage</goal>
 						</goals>
