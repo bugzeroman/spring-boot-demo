@@ -63,7 +63,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<!--输入的jar -->
+					<!--指定混淆的jar,如springboot打出来的jar基于它混淆 -->
 					<injar>${project.build.finalName}.jar</injar>
 					<!--输出的jar -->
 					<outjar>${project.build.finalName}-proguard.jar</outjar>
@@ -71,7 +71,6 @@
 					<obfuscate>true</obfuscate>
 					<!-- 解决依赖lib文件名太长的问题 -->
 					<putLibraryJarsInTempDir>true</putLibraryJarsInTempDir>
-					<!--指定混淆的jar,如springboot打出来的jar基于它混淆 -->
 					<options>
 						<!--指定JDK版本号 -->
 						<option>-target 1.8</option>
@@ -96,20 +95,9 @@
 						<option>-keepnames interface **</option>
 						<!--保留枚举成员及方法 -->
 						<option>-keepclassmembers enum * { *; }</option>
-						<!--保留main方法的类及其方法名 -->
-						<option>-keepclasseswithmembers public class * {
-							public static void
-							main(java.lang.String[]);}</option>
-						<!--入口程序类不能混淆，混淆会导致springboot启动不了 -->
-						<option>-keep class com.yuwen.spring.demo.DemoApplication</option>
-						<option>-keepclassmembers class com.yuwen.spring.demo.DemoApplication{
-							*;}</option>
-						<!--不混淆所有类,保存原始定义的注释 -->
-						<option>-keepclassmembers class * {
-							@org.springframework.beans.factory.annotation.Autowired *;
-							@org.springframework.beans.factory.annotation.Value *;
-							}
-						</option>
+						<!--仅混淆指定实现类 -->
+						<option>-keep class
+							!com.yuwen.spring.demo.controller.impl.UserControllerImpl { *; }</option>
 					</options>
 					<libs>
 						<!-- 添加依赖 java8 -->
