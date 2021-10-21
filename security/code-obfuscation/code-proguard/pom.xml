@@ -48,26 +48,75 @@
 
 	<build>
 		<plugins>
-			<!-- Spring Boot打包插件,必须在proguard插件前面 -->
+			<!-- proguard代码混淆插件 -->
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.3.1.RELEASE</version>
-				<configuration>
-					<!--指定spring boot的启动类 -->
-					<mainClass>com.yuwen.spring.demo.DemoApplication</mainClass>
-					<!--指定打包后jar包的名称 -->
-					<classifier>exec</classifier>
-				</configuration>
+				<groupId>com.github.wvengen</groupId>
+				<artifactId>proguard-maven-plugin</artifactId>
+				<version>2.5.1</version>
 				<executions>
 					<execution>
-						<!--打包时，重新打包指定spring boot的启动类 -->
-						<id>repackage when package</id>
+						<!-- 打包的时候开始混淆 -->
+						<phase>package</phase>
 						<goals>
-							<goal>repackage</goal>
+							<goal>proguard</goal>
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<!--输入的jar -->
+					<injar>${project.build.finalName}.jar</injar>
+					<!--输出的jar -->
+					<outjar>${project.build.finalName}-proguard.jar</outjar>
+					<!-- 是否混淆 -->
+					<obfuscate>true</obfuscate>
+					<!-- 解决依赖lib文件名太长的问题 -->
+					<putLibraryJarsInTempDir>true</putLibraryJarsInTempDir>
+					<!--指定混淆的jar,如springboot打出来的jar基于它混淆 -->
+					<options>
+						<!--指定JDK版本号 -->
+						<option>-target 1.8</option>
+						<!--默认开启，这里关闭，不做收缩（删除注释、未被引用代码） -->
+						<option>-dontshrink</option>
+						<!--默认是开启的，这里关闭字节码级别的优化 -->
+						<option>-dontoptimize</option>
+						<!--对于类成员的命名的混淆采取唯一策略 -->
+						<option>-useuniqueclassmembernames</option>
+						<!--混淆类名之后，对使用Class.forName('className')之类的地方进行相应替代 -->
+						<option>-adaptclassstrings</option>
+						<!-- 忽略打包时的告警信息 -->
+						<option>-ignorewarnings</option>
+						<!-- 混淆时不生成大小写混合的类名，默认是可以大小写混合 -->
+						<option>-dontusemixedcaseclassnames</option>
+						<!-- 不修改参数名称 -->
+						<option>-keepparameternames</option>
+						<!--对异常、注解信息在runtime予以保留，不然影响springboot启动 -->
+						<option>-keepattributes
+							Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod</option>
+						<!--保留接口类名 -->
+						<option>-keepnames interface **</option>
+						<!--保留枚举成员及方法 -->
+						<option>-keepclassmembers enum * { *; }</option>
+						<!--保留main方法的类及其方法名 -->
+						<option>-keepclasseswithmembers public class * {
+							public static void
+							main(java.lang.String[]);}</option>
+						<!--入口程序类不能混淆，混淆会导致springboot启动不了 -->
+						<option>-keep class com.yuwen.spring.demo.DemoApplication</option>
+						<option>-keepclassmembers class com.yuwen.spring.demo.DemoApplication{
+							*;}</option>
+						<!--不混淆所有类,保存原始定义的注释 -->
+						<option>-keepclassmembers class * {
+							@org.springframework.beans.factory.annotation.Autowired *;
+							@org.springframework.beans.factory.annotation.Value *;
+							}
+						</option>
+					</options>
+					<libs>
+						<!-- 添加依赖 java8 -->
+						<lib>${java.home}/lib/rt.jar</lib>
+						<lib>${java.home}/lib/jce.jar</lib>
+					</libs>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
