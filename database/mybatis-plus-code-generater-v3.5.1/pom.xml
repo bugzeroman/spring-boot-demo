@@ -7,8 +7,8 @@
 		<artifactId>database</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>mybatis-plus-code-generater</artifactId>
-	<description>MyBatis Plus代码生成器使用Demo,3.5.1版本之前的生成方式</description>
+	<artifactId>mybatis-plus-code-generater-v3.5.1</artifactId>
+	<description>MyBatis Plus代码生成器使用Demo,3.5.1版本之后的生成方式</description>
 
 	<dependencies>
 		<dependency>
@@ -26,11 +26,16 @@
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-generator</artifactId>
-			<version>3.3.2</version>
+			<version>3.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-extension</artifactId>
+			<version>3.4.3</version>
 		</dependency>
 		<!-- Mybatis-Plus end -->
 

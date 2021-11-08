@@ -10,5 +10,6 @@
   <description>数据库持久化相关框架使用Demo</description>
   <modules>
   	<module>mybatis-plus-code-generater</module>
+  	<module>mybatis-plus-code-generater-v3.5.1</module>
   </modules>
 </project>
