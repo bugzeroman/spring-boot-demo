@@ -38,7 +38,7 @@ public class CodeGenerator {
 	public static void main(String[] args) {
 		// 1.数据库配置
 		DataSourceConfig.Builder dataSourceConfigBuilder = new DataSourceConfig.Builder(JDBC_URL, JDBC_USER_NAME,
-				JDBC_PASSOWRD).dbQuery(new MySqlQuery()).schema("demodb").typeConvert(new MySqlTypeConvert())
+				JDBC_PASSOWRD).dbQuery(new MySqlQuery()).typeConvert(new MySqlTypeConvert())
 						.keyWordsHandler(new MySqlKeyWordsHandler());
 
 		// 1.1.快速生成器
@@ -50,8 +50,8 @@ public class CodeGenerator {
 
 		// 3.包配置
 		fastAutoGenerator.packageConfig(packageConfigBuilder -> packageConfigBuilder.parent(PACKAGE_NAME)
-				.moduleName(MODULE_NAME).entity("entity").mapper("dao").xml("mapper.xml").service("service")
-				.serviceImpl("service.impl").controller("controller").other("other")
+				.moduleName(MODULE_NAME).entity("entity").mapper("dao").service("service").serviceImpl("service.impl")
+				.controller("controller").other("other")
 				.pathInfo(Collections.singletonMap(OutputFile.mapperXml, "src\\main\\resources")));
 
 		// 4.模板配置
@@ -67,8 +67,19 @@ public class CodeGenerator {
 		// 6.1.Entity策略配置 TODO
 
 		// 6.2.Controller策略配置
+		// 开启生成@RestController 控制器
+		fastAutoGenerator
+				.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.controllerBuilder().enableRestStyle());
+
 		// 6.3.Service策略配置
+		// 格式化service接口和实现类的文件名称，去掉默认的ServiceName前面的I
+		fastAutoGenerator.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.serviceBuilder()
+				.formatServiceFileName("%sService").formatServiceImplFileName("%sServiceImpl"));
+
 		// 6.4.Mapper策略配置
+		// 格式化 mapper文件名,格式化xml实现类文件名称
+		fastAutoGenerator.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.mapperBuilder()
+				.formatMapperFileName("%sDao").formatXmlFileName("%sDao"));
 
 		// 7.生成代码
 		fastAutoGenerator.execute();
