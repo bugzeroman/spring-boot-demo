@@ -2,12 +2,14 @@ package com.yuwen.spring.uitl.generate;
 
 import java.util.Collections;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
+import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
@@ -77,7 +79,14 @@ public class CodeGenerator {
 		fastAutoGenerator.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.enableCapitalMode()
 				.enableSkipView().disableSqlFilter().addInclude(TBL_NAMES).addTablePrefix(TABLE_PREFIX));
 
-		// 6.1.Entity策略配置 TODO
+		// 6.1.Entity策略配置
+		// 生成实体时生成字段的注解，包括@TableId注解等
+		// 数据库表和字段映射到实体的命名策略，为下划线转驼峰
+		// 全局主键类型为None
+		// 实体名称格式化为XXXEntity
+		fastAutoGenerator.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.entityBuilder()
+				.enableTableFieldAnnotation().naming(NamingStrategy.underline_to_camel)
+				.columnNaming(NamingStrategy.underline_to_camel).idType(IdType.NONE).formatFileName("%sEntity"));
 
 		// 6.2.Controller策略配置
 		// 开启生成@RestController控制器
