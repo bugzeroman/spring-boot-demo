@@ -1,5 +1,8 @@
 package com.example.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,28 +16,32 @@ import java.time.LocalDateTime;
  * @since 2021-11-09
  */
 @TableName("TBL_ROLE")
-public class Role implements Serializable {
+public class RoleEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键ID
      */
+    @TableId(value = "id", type = IdType.NONE)
     private Long id;
 
     /**
      * 角色名
      */
+    @TableField("role_name")
     private String roleName;
 
     /**
      * 角色描述
      */
+    @TableField("role_describe")
     private String roleDescribe;
 
     /**
      * 创建时间
      */
+    @TableField("create_time")
     private LocalDateTime createTime;
 
     public Long getId() {
@@ -68,7 +75,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "Role{" +
+        return "RoleEntity{" +
             "id=" + id +
             ", roleName=" + roleName +
             ", roleDescribe=" + roleDescribe +

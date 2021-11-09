@@ -1,6 +1,6 @@
 package com.example.demo.dao;
 
-import com.example.demo.entity.User;
+import com.example.demo.entity.UserEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author yuwen
  * @since 2021-11-09
  */
-public interface UserDao extends BaseMapper<User> {
+public interface UserDao extends BaseMapper<UserEntity> {
 
 }
