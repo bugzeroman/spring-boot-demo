@@ -45,29 +45,42 @@ public class CodeGenerator {
 		FastAutoGenerator fastAutoGenerator = FastAutoGenerator.create(dataSourceConfigBuilder);
 
 		// 2.全局配置
+		// 覆盖已生成文件
+		// 不打开生成文件目录
+		// 指定输出目录,注意使用反斜杠\
+		// 设置注释的作者
+		// 设置注释的日期格式
+		// 使用java8新的时间类型
 		fastAutoGenerator.globalConfig(globalConfigBuilder -> globalConfigBuilder.fileOverride().disableOpenDir()
-				.outputDir("src\\main\\java").author("yuwen").dateType(DateType.TIME_PACK).commentDate("yyyy-MM-dd"));
+				.outputDir("src\\main\\java").author("yuwen").commentDate("yyyy-MM-dd").dateType(DateType.TIME_PACK));
 
 		// 3.包配置
+		// 设置父包名
+		// 设置父包模块名
+		// 设置MVC下各个模块的包名
+		// 设置XML资源文件的目录
 		fastAutoGenerator.packageConfig(packageConfigBuilder -> packageConfigBuilder.parent(PACKAGE_NAME)
 				.moduleName(MODULE_NAME).entity("entity").mapper("dao").service("service").serviceImpl("service.impl")
 				.controller("controller").other("other")
 				.pathInfo(Collections.singletonMap(OutputFile.mapperXml, "src\\main\\resources\\mapper")));
 
 		// 4.模板配置
+		// 使用Freemarker引擎模板，默认的是Velocity引擎模板
 		AbstractTemplateEngine templateEngine = new FreemarkerTemplateEngine();
 		fastAutoGenerator.templateEngine(templateEngine);
 
 		// 5.注入配置 TODO
 
 		// 6.策略配置
+		// 设置需要生成的表名
+		// 设置过滤表前缀
 		fastAutoGenerator.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.enableCapitalMode()
 				.enableSkipView().disableSqlFilter().addInclude(TBL_NAMES).addTablePrefix(TABLE_PREFIX));
 
 		// 6.1.Entity策略配置 TODO
 
 		// 6.2.Controller策略配置
-		// 开启生成@RestController 控制器
+		// 开启生成@RestController控制器
 		fastAutoGenerator
 				.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.controllerBuilder().enableRestStyle());
 
