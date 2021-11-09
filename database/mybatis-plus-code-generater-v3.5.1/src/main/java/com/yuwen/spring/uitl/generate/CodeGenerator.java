@@ -52,7 +52,7 @@ public class CodeGenerator {
 		fastAutoGenerator.packageConfig(packageConfigBuilder -> packageConfigBuilder.parent(PACKAGE_NAME)
 				.moduleName(MODULE_NAME).entity("entity").mapper("dao").service("service").serviceImpl("service.impl")
 				.controller("controller").other("other")
-				.pathInfo(Collections.singletonMap(OutputFile.mapperXml, "src\\main\\resources")));
+				.pathInfo(Collections.singletonMap(OutputFile.mapperXml, "src\\main\\resources\\mapper")));
 
 		// 4.模板配置
 		AbstractTemplateEngine templateEngine = new FreemarkerTemplateEngine();
