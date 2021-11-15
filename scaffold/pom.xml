@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- 脚手架工程父工程，为了复用方便，不继承父工程，也不在此配置任何依赖管理 -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.yuwen.spring</groupId>
+	<artifactId>scaffold</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<description>Spring Boot Scaffold脚手架工程，可供复制直接快速开始项目。</description>
+	<!--子工程说明:
+	子工程都是Spring Boot的Maven工程，
+	各个子工程命名按照集成的组件来命名，以sd(Scaffold)开头，中间-连接，
+	为了防止工程名称太长，集成的组件缩写规则如下，并且按照顺序集成：
+	Spring功能:
+	1.Spring Boot Web == web
+	
+	工具类库：
+	1.Google Guava == gva
+	2.Apache Common == cmn
+	3.Hutool == htl
+	
+	日志框架：
+	1.Log4j2 == l4j2
+	2.LogBack = lgbk
+		
+	数据库访问：
+	1.MyBatis == mb
+	2.MyBatis Plus == mbp
+	3.Oracle == orl
+	4.MySQL  == msl
+	5.PostgreSQL == pg
+	
+	测试框架：
+	1.Junit4 == j4
+	2.Junit5 == j5
+	3.EasyMock == emk
+	 -->
+	<modules>
+		<module>sd-web-cmn-l4j2-mbp-msl-j5</module>
+	</modules>
+</project>
