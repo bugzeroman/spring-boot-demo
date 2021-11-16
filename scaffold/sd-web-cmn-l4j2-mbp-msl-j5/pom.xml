@@ -11,6 +11,8 @@
 	<name>Scaffold-Spring Boot Web-Apache Common-Log4j2-MyBatis Plus-MySQL-Junit5</name>
 	<properties>
 		<spring-boot.version>2.5.6</spring-boot.version>
+		<mybatis.plus.version>3.4.3.4</mybatis.plus.version>
+		<mybatis.plus.generator.version>3.5.1</mybatis.plus.generator.version>
 	</properties>
 
 	<dependencyManagement>
@@ -23,9 +25,20 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis.plus.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-generator</artifactId>
+				<version>${mybatis.plus.generator.version}</version>
+				<scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -38,22 +51,19 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Mybatis-Plus start MBP代码生成器 -->
+		<!-- Mybatis-Plus start MBP框架及代码生成器 -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-generator</artifactId>
-			<version>3.5.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-extension</artifactId>
-			<version>3.4.3</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- Mybatis-Plus end -->
