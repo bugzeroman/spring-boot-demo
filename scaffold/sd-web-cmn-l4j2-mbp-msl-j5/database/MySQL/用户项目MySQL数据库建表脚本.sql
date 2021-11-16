@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2021/11/15 10:08:26                          */
+/* Created on:     2021/11/16 10:16:37                          */
 /*==============================================================*/
 
 
@@ -17,7 +17,7 @@ create table tbl_role
 (
    id                   int not null comment '角色ID',
    name                 varchar(100) not null comment '角色名称',
-   "desc"               text comment '角色描述',
+   description          text comment '角色描述',
    status               bool not null comment '角色状态，true：有效，false：无效',
    create_time          datetime not null comment '创建时间',
    primary key (id)
