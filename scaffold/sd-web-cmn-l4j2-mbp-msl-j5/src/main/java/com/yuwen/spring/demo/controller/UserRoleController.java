@@ -1,9 +1,6 @@
 package com.yuwen.spring.demo.controller;
 
-
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -13,8 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author yuwen
  * @since 2021-11-16
  */
-@RestController
 @RequestMapping("/demo/user-role-entity")
-public class UserRoleController {
+public interface UserRoleController {
 
 }
