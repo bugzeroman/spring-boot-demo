@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author yuwen
- * @since 2021-11-16
+ * @since 2021-11-18
  */
 @TableName("tbl_user")
 public class UserEntity implements Serializable {
@@ -55,7 +55,7 @@ public class UserEntity implements Serializable {
      * 修改时间
      */
     @TableField("update_time")
-    private String updateTime;
+    private LocalDateTime updateTime;
 
     public Long getId() {
         return id;
@@ -92,11 +92,11 @@ public class UserEntity implements Serializable {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
-    public String getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 

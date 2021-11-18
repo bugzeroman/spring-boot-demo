@@ -92,8 +92,11 @@ public class MyBatisPlusCodeGenerator {
 
 		// 6.2.Controller策略配置
 		// 开启生成@RestController控制器
-		fastAutoGenerator
-				.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.controllerBuilder().enableRestStyle());
+//		fastAutoGenerator
+//				.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.controllerBuilder().enableRestStyle());
+		// 为了不覆盖修改过的controller层，生成新的名称，后面直接删除即可
+		fastAutoGenerator.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.controllerBuilder()
+				.formatFileName("New%sController").enableRestStyle());
 
 		// 6.3.Service策略配置
 		// 格式化service接口和实现类的文件名称，去掉默认的ServiceName前面的I
