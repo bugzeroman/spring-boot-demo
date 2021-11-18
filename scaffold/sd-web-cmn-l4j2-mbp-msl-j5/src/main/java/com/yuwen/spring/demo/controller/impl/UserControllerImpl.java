@@ -65,6 +65,9 @@ public class UserControllerImpl implements UserController {
 	@Override
 	public QueryOneUserRsp queryOneUser(Long id) {
 		UserEntity userEntity = userService.getById(id);
+		if (userEntity == null) {
+			return null;
+		}
 		QueryOneUserRsp userRsp = new QueryOneUserRsp();
 		userRsp.setId(userEntity.getId());
 		userRsp.setName(userEntity.getName());
