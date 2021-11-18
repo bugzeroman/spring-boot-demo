@@ -55,9 +55,12 @@ public class MyBatisPlusCodeGenerator {
 		// 设置注释的作者
 		// 设置注释的日期格式
 		// 使用java8新的时间类型
-		fastAutoGenerator.globalConfig(globalConfigBuilder -> globalConfigBuilder.fileOverride().disableOpenDir()
-				.outputDir("src\\main\\java").author("yuwen").commentDate("yyyy-MM-dd").dateType(DateType.TIME_PACK));
-
+//		fastAutoGenerator.globalConfig(globalConfigBuilder -> globalConfigBuilder.fileOverride().disableOpenDir()
+//				.outputDir("src\\main\\java").author("yuwen").commentDate("yyyy-MM-dd").dateType(DateType.TIME_PACK));
+		// 指定生成的日期，可以不修改没有改变的类
+		fastAutoGenerator.globalConfig(
+				globalConfigBuilder -> globalConfigBuilder.fileOverride().disableOpenDir().outputDir("src\\main\\java")
+						.author("yuwen").commentDate(() -> "2021-11-16").dateType(DateType.TIME_PACK));
 		// 3.包配置
 		// 设置父包名
 		// 设置父包模块名
