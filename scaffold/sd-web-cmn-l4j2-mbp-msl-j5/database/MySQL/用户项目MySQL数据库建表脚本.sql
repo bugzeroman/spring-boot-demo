@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2021/11/16 10:16:37                          */
+/* Created on:     2021/11/18 16:40:27                          */
 /*==============================================================*/
 
 
@@ -35,7 +35,7 @@ create table tbl_user
    email                varchar(100) comment '邮箱',
    birthday             date comment '生日',
    create_time          datetime not null comment '创建时间',
-   update_time          varchar(100) comment '修改时间',
+   update_time          datetime comment '修改时间',
    primary key (id)
 );
 
