@@ -1,5 +1,7 @@
 package com.yuwen.spring.demo.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +40,7 @@ public interface UserController {
 	QueryOneUserRsp queryOneUser(@PathVariable Long id);
 
 	@PostMapping("batch")
-	void queryBatchUser(@RequestBody QueryBatchUserReq userReq, @RequestParam("pageNum") Integer pageNum,
-			@RequestParam("pageSize") Integer pageSize);
+	List<QueryOneUserRsp> queryBatchUser(@RequestBody(required = false) QueryBatchUserReq userReq,
+			@RequestParam(name = "pageNum", required = false) Integer pageNum,
+			@RequestParam(name = "pageSize", required = false) Integer pageSize);
 }

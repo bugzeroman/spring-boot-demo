@@ -2,11 +2,16 @@ package com.yuwen.spring.demo.controller.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yuwen.spring.demo.controller.UserController;
 import com.yuwen.spring.demo.entity.UserEntity;
 import com.yuwen.spring.demo.pojo.request.CreateUserReq;
@@ -68,6 +73,11 @@ public class UserControllerImpl implements UserController {
 		if (userEntity == null) {
 			return null;
 		}
+		QueryOneUserRsp userRsp = transferUserEntity2QueryOneUserRsp(userEntity);
+		return userRsp;
+	}
+
+	private QueryOneUserRsp transferUserEntity2QueryOneUserRsp(UserEntity userEntity) {
 		QueryOneUserRsp userRsp = new QueryOneUserRsp();
 		userRsp.setId(userEntity.getId());
 		userRsp.setName(userEntity.getName());
@@ -76,16 +86,36 @@ public class UserControllerImpl implements UserController {
 		userRsp.setBirthday(birthday);
 		String createTime = LocalDateTimeUtil.formatNormal(userEntity.getCreateTime());
 		userRsp.setCreateTime(createTime);
-//		String updateTime = LocalDateTimeUtil.formatNormal(userEntity.getUpdateTime());
-//		userRsp.setUpdateTime(updateTime);
-
+		if (userEntity.getUpdateTime() != null) {
+			String updateTime = LocalDateTimeUtil.formatNormal(userEntity.getUpdateTime());
+			userRsp.setUpdateTime(updateTime);
+		}
 		return userRsp;
 	}
 
 	@Override
-	public void queryBatchUser(QueryBatchUserReq userReq, Integer pageNum, Integer pageSize) {
-		// TODO Auto-generated method stub
+	public List<QueryOneUserRsp> queryBatchUser(QueryBatchUserReq userReq, Integer pageNum, Integer pageSize) {
+		if (pageNum == null) {
+			pageNum = 1;
+		}
 
+		if (pageSize == null) {
+			pageSize = Integer.MAX_VALUE;
+		}
+
+		IPage<UserEntity> page = new Page<UserEntity>();
+		page.setCurrent(pageNum);
+		page.setSize(pageSize);
+		// 返回的pageNew和page是同一个对象
+		IPage<UserEntity> pageNew = userService.page(page);
+		List<UserEntity> records = pageNew.getRecords();
+		if (CollectionUtils.isEmpty(records)) {
+			return null;
+		}
+		List<QueryOneUserRsp> results = records.stream().map(userEntity -> {
+			return transferUserEntity2QueryOneUserRsp(userEntity);
+		}).collect(Collectors.toList());
+		return results;
 	}
 
 }
