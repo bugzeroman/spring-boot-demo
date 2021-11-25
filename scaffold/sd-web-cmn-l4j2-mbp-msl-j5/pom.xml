@@ -82,6 +82,18 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!--spring切面aop依赖，移除logback依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<!-- MySQL 数据库 -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -137,7 +149,7 @@
 			<artifactId>hutool-all</artifactId>
 		</dependency>
 		<!--Common end -->
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
