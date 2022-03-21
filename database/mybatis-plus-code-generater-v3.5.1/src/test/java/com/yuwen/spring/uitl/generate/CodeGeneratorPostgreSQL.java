@@ -2,13 +2,15 @@ package com.yuwen.spring.uitl.generate;
 
 import java.util.Collections;
 
+import org.junit.jupiter.api.Test;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.IDbQuery;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
-import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
+import com.baomidou.mybatisplus.generator.config.querys.PostgreSqlQuery;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
@@ -16,31 +18,36 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
 
 /**
- * 
- * MySQL数据库代码生成器 ，先修改下面的常量配置参数，然后执行 main方法
+ *
+ * PostgreSQL数据库代码生成器 ，先修改下面的常量配置参数，然后执行generate方法
  */
-public class CodeGenerator {
+public class CodeGeneratorPostgreSQL {
 
 	// 数据库类型 MySQL
-	private static final IDbQuery dbQuery = new MySqlQuery();
-
+	// private static final IDbQuery dbQuery = new MySqlQuery();
+	// 数据库类型PostgreSql
+	private static final IDbQuery dbQuery = new PostgreSqlQuery();
 	// 数据库连接配置
-	private static final String JDBC_URL = "jdbc:mysql://10.21.13.14:3306/demodb?useUnicode=true&useSSL=false&characterEncoding=utf8";
-	private static final String JDBC_USER_NAME = "demo";
-	private static final String JDBC_PASSOWRD = "demo123456";
+	private static final String JDBC_URL = "jdbc:postgresql://10.21.13.48:5432/postgres?currentSchema=public";
+	private static final String JDBC_USER_NAME = "antdb";
+	private static final String JDBC_PASSOWRD = "SDN@AntDB";
 
 	// 包名和模块名
-	private static final String PACKAGE_NAME = "com.example";
-	private static final String MODULE_NAME = "demo";
+	private static final String PACKAGE_NAME = "com.ai.ipc.common";
+	private static final String MODULE_NAME = "db";
 
-	// 表名，需要自动生成代码的表， 多个表使用英文逗号分割
-	private static final String[] TBL_NAMES = { "tbl_user", "tbl_role" };
+	// 表名，指定需要生成代码的表，多个表使用英文逗号分割
+	private static final String[] TBL_NAMES = { "tbl_device", "tbl_device_info", "tbl_device_mac", "tbl_interface",
+			"tbl_physical_link", "tbl_protocol" };
+
+	// 注意不要引入xxl-job相关的表，业务不会直接使用这些表
 
 	// 表名的前缀，从表生成代码时会去掉前缀
 	private static final String TABLE_PREFIX = "tbl_";
 
-	// 生成代码入口main方法
-	public static void main(String[] args) {
+	// 生成代码入口，执行Run -> Junit Test
+	@Test
+	public void generate() {
 		// 1.数据库配置
 		DataSourceConfig.Builder dataSourceConfigBuilder = new DataSourceConfig.Builder(JDBC_URL, JDBC_USER_NAME,
 				JDBC_PASSOWRD).dbQuery(dbQuery).typeConvert(new MySqlTypeConvert())
@@ -84,22 +91,17 @@ public class CodeGenerator {
 
 		// 6.1.Entity策略配置
 		// 生成实体时生成字段的注解，包括@TableId注解等
+		// 去掉.enableTableFieldAnnotation()，不生成注解
 		// 数据库表和字段映射到实体的命名策略，为下划线转驼峰
 		// 全局主键类型为None
 		// 实体名称格式化为XXXEntity
 		fastAutoGenerator.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.entityBuilder()
-				.enableTableFieldAnnotation().naming(NamingStrategy.underline_to_camel)
-				.columnNaming(NamingStrategy.underline_to_camel).idType(IdType.NONE).formatFileName("%sEntity"));
-
-		// 如果不需要生成注解，去掉.enableTableFieldAnnotation()
+				.naming(NamingStrategy.underline_to_camel).columnNaming(NamingStrategy.underline_to_camel)
+				.idType(IdType.NONE).formatFileName("%sEntity"));
 
 		// 6.2.Controller策略配置
-		// 开启生成@RestController控制器
-		fastAutoGenerator
-				.strategyConfig(strategyConfigBuilder -> strategyConfigBuilder.controllerBuilder().enableRestStyle());
-
-		// 如果不需要生成Controller
-		// fastAutoGenerator.templateConfig(templateConfig -> templateConfig.controller(""));
+		// 不生成Controller
+		fastAutoGenerator.templateConfig(templateConfig -> templateConfig.controller(""));
 
 		// 6.3.Service策略配置
 		// 格式化service接口和实现类的文件名称，去掉默认的ServiceName前面的I
