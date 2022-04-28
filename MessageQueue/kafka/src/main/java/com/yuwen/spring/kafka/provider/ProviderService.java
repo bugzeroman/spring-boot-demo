@@ -5,7 +5,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 /**
- * 生产者服务
+ * 生产者服务类
  *
  */
 @Service
@@ -15,8 +15,9 @@ public class ProviderService {
 	@Autowired
 	private KafkaTemplate<?, String> kafkaTemplate;
 
-	public void send(String msg) {
+	public void send(String message) {
 		// 发送消息
-		kafkaTemplate.send(TOPIC, msg);
+		kafkaTemplate.send(TOPIC, message);
+		System.out.println("Provider= " + message);
 	}
 }

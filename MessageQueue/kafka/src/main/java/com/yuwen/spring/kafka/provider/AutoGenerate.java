@@ -25,7 +25,6 @@ public class AutoGenerate implements InitializingBean {
 				while (true) {
 					String message = UUID.randomUUID().toString();
 					providerService.send(message);
-					System.out.println("Provider= " + message);
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
