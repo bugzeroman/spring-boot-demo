@@ -36,6 +36,7 @@
 		<module>database</module>
 		<module>security</module>
 		<module>scaffold</module>
+		<module>MessageQueue</module>
 	</modules>
 
 	<build>
