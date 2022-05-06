@@ -19,5 +19,9 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer   
       # 消费者所属消息组
       group-id: testGroup 
-      # 从头开始消费，配合不同的group id      auto-offset-reset: earliest        
-    
+      # 从头开始消费，配合不同的group id      auto-offset-reset: earliest
+      # 表示接受反序列化任意的类，也可限定包路径      properties:
+        spring:
+          json: 
+            trusted:
+              packages: '*'

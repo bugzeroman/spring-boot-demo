@@ -11,5 +11,6 @@
   <description>MessageQueue消息队列父工程</description>
   <modules>
   	<module>kafka</module>
+  	<module>kafka-json</module>
   </modules>
 </project>
